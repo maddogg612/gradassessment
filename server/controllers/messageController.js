@@ -44,19 +44,22 @@ messageController.postMessage = async (req, res, next) => {
   
 
 messageController.deleteMessage = async (req, res, next) => {
-  console.log('Cookie: ', req.cookies, 'Password: ', req.body._id)
+  console.log('Res.locals.message._id: ', res.locals.message._id)
+  // console.log('Cookie: ', req.cookies, 'Password: ', req.body._id)
   // console.log('in delete message controller. Req.body is: ', req.body)
   
   try{
-    const {_id} = req.body
-    const checkPW = await Message.findOne({_id})
-    console.log("Checking pw: ", checkPW)
-    if(req.cookies.pass === checkPW.password){
-       res.locals.message = await Message.findOneAndDelete({_id})
-    }else {
-      return next()
-    }
-    res.locals.message = await Message.findOneAndDelete({_id})
+    // const {_id} = req.body
+    // const checkPW = await Message.findOne({_id})
+    // console.log("Checking pw: ", checkPW)
+    // if(req.cookies.pass === checkPW.password){
+    //    res.locals.message = await Message.findOneAndDelete({_id})
+    // }else {
+    //   res.locals.message = 'Password is incorrect...Not Deleted';
+    //   // return next()
+    // }
+    // res.locals.message = await Message.findOneAndDelete({_id})
+    await Message.findOneAndDelete({_id:res.locals.message._id})
     return next()
   }
   catch(err){

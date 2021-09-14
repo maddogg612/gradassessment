@@ -34,7 +34,7 @@ app.get('/messages',
     // return res.status.json(res.locals.messages)
   }
 )
-app.post('/', 
+app.post('/api', 
 messageController.postMessage,
 authController.setSSIDCookie,
 (req,res) => {
@@ -46,8 +46,8 @@ authController.setSSIDCookie,
   //.json(res.locals.message)
 })
 
-app.delete('/', 
-
+app.delete('/api', 
+authController.checkId,
 messageController.deleteMessage,
 (req,res) => {
   console.log('Response in delete message: ',res.locals.message)

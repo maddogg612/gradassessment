@@ -14,6 +14,7 @@ const Schema = mongoose.Schema
 const messageSchema = Schema({
   message: {type: String, required: true},
   password: {type: String, default: true},
+  date: {type: Date, default: Date.now}
 })
 
 module.exports = new mongoose.model('Message', messageSchema) // <-- export your model
